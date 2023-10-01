@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }} - Уроки</title>
+</head>
+<body>
+{% block content %}
+    <h1>{{ product.name }} - Уроки</h1>
+    <ul>
+        {% for lesson in lessons %}
+            <li>
+                <a href="{{ lesson.video_link }}" target="_blank">{{ lesson.name }}</a>
+                (Длительность: {{ lesson.duration_seconds }} секунд)
+                <a href="{% url 'add_lesson_to_profile' lesson.id %}">Добавить в профиль</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+</body>
+</html>

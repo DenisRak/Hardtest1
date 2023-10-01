@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Профиль пользователя: {{ user.username }}</h1>
+<h2>Уроки в вашем профиле:</h2>
+<ul>
+    {% for lesson_access in lesson_access_list %}
+        <li>{{ lesson_access.lesson.name }}</li>
+    <li><a href="{% url 'view_lesson' lesson_access.lesson.id %}">Просмотреть урок "{{ lesson.name }}"</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

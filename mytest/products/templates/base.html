@@ -1,0 +1,31 @@
+
+{% extends 'index.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список продуктов</title>
+
+</head>
+<body>
+{% block content %}
+    <h1>Список продуктов</h1>
+    <ul>
+        {% for product in products %}
+            <li>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                {% else %}
+                    {{ product.name }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'user_profile' request.user.id %}">Мой профиль</a>
+       <a href="{% url 'profile' %}">Ваши уроки</a>
+    {% endif %}
+{% endblock %}
+</body>
+</html>
+

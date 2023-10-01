@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Просмотр урока: {{ lesson.name }}</title>
+</head>
+<body>
+{% block content %}
+    <h1>{{ lesson.name }}</h1>
+    <p>Ссылка на видео: <a href="{{ lesson.video_link }}" target="_blank">{{ lesson.video_link }}</a></p>
+    <p>Длительность урока: {{ lesson.duration_seconds }} секунд</p>
+
+    <h2>Просмотр урока</h2>
+    <form method="post" id="lessonForm">
+        {% csrf_token %}
+        <label for="viewed_time_seconds">Время просмотра (в секундах):</label>
+        <input type="number" id="viewed_time_seconds" name="viewed_time_seconds" required>
+        <button type="submit">Зафиксировать время</button>
+    </form>
+
+    <h2>Статус урока</h2>
+    <p>Статус: {{ lesson_progress.status }}</p>
+
+    <h2>Просмотренное время</h2>
+    <p>Просмотрено: <span id="viewedTime">{{ lesson_progress.viewed_time_seconds }}</span> секунд</p>
+
+    <h2>Дата последнего просмотра</h2>
+    <p>Дата последнего просмотра: {{ lesson_progress.updated_at }}</p>
+    <a href="{% url 'add_lesson_to_profile' lesson.id %}">Вернуться в профиль</a>
+
+
+
+{% endblock %}
+</body>
+</html>
+
